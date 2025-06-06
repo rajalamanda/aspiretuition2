@@ -23,7 +23,6 @@
       top: 0;
       width: 100%;
       z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     header .logo {
       font-size: 1.8rem;
@@ -38,14 +37,14 @@
       color: white;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
     }
     nav ul li a:hover {
       color: #00b4d8;
     }
     .hero {
       margin-top: 80px;
-      background: linear-gradient(rgba(0,48,135,0.9), rgba(0,48,135,0.9)), url('https://images.unsplash.com/photo-1584697964403-4c09a1dc1c8f?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,48,135,0.9), rgba(0,48,135,0.9)),
+        url('https://images.unsplash.com/photo-1584697964403-4c09a1dc1c8f?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
       height: 90vh;
       color: white;
       display: flex;
@@ -61,9 +60,8 @@
       border-radius: 30px;
       font-size: 1.1rem;
       text-decoration: none;
-      transition: background 0.3s;
-      display: inline-block;
       margin-top: 1rem;
+      display: inline-block;
     }
     .cta-button:hover {
       background-color: #0077b6;
@@ -85,37 +83,55 @@
       margin-top: 2rem;
     }
     .service-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
       text-align: center;
     }
-    .service-card .icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .tutor-profile {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 4rem;
-    }
-    .tutor-profile img {
-      max-width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
     .tutor-details {
-      flex: 1;
-      min-width: 280px;
+      margin-top: 4rem;
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 12px;
     }
     .tutor-details h3 {
       color: #003087;
     }
     .tutor-details ul {
+      list-style: disc;
       margin-left: 1.5rem;
-      list-style-type: disc;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .testimonial-card {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .testimonial-card .stars {
+      color: #f5c518;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .testimonial-card p {
+      font-style: italic;
+      color: #555;
+    }
+    .testimonial-card cite {
+      text-align: right;
+      display: block;
+      font-weight: 600;
+      color: #003087;
+      margin-top: 1rem;
     }
     .contact-info p, .contact-info a {
       font-size: 1.1rem;
@@ -134,42 +150,6 @@
     footer a:hover {
       text-decoration: underline;
     }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .testimonial-card {
-      background-color: #ffffff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .testimonial-card:hover {
-      transform: translateY(-5px);
-    }
-    .testimonial-card p {
-      font-style: italic;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-    .testimonial-card .stars {
-      color: #f5c518;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      text-align: left;
-    }
-    .testimonial-card cite {
-      display: block;
-      text-align: right;
-      font-weight: 600;
-      color: #003087;
-    }
   </style>
 </head>
 <body>
@@ -179,6 +159,7 @@
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#lessons">Lessons</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -196,61 +177,48 @@
 <section class="section" id="services">
   <h2>Subjects Offered</h2>
   <div class="services-grid">
-    <div class="service-card"><div class="icon">⚛️</div><h3>GCSE Physics</h3><p>Master fundamental physics concepts and techniques.</p></div>
-    <div class="service-card"><div class="icon">🧪</div><h3>GCSE Chemistry</h3><p>Understand reactions, equations, and lab skills.</p></div>
-    <div class="service-card"><div class="icon">🧬</div><h3>GCSE Biology</h3><p>Explore life sciences from cells to ecosystems.</p></div>
-    <div class="service-card"><div class="icon">🔬</div><h3>A Level Biology</h3><p>Advanced biology and university preparation.</p></div>
+    <div class="service-card"><h3>GCSE Physics</h3><p>Master fundamental physics concepts and techniques.</p></div>
+    <div class="service-card"><h3>GCSE Chemistry</h3><p>Understand reactions, equations, and lab skills.</p></div>
+    <div class="service-card"><h3>GCSE Biology</h3><p>Explore life sciences from cells to ecosystems.</p></div>
+    <div class="service-card"><h3>A Level Biology</h3><p>Advanced biology and university preparation.</p></div>
   </div>
 
-  <div class="tutor-profile">
-    <img src="DSC_1071.JPG" alt="Dr. Anindya Srivastava">
-    <div class="tutor-details">
-      <h3>Meet Dr. Anindya Srivastava</h3>
-      <p>I'm a passionate and experienced Science tutor with more than 10 years of teaching experience. With a teaching degree (PGCE) from Birmingham City University and a Bachelor's degree in Medicine, I bring both academic excellence and practical knowledge to every lesson.</p>
-      <p>My expertise lies in teaching all three GCSE Sciences (Physics, Chemistry, and Biology) and A-Level Biology. I believe that learning should be engaging and use various teaching methods and strategies to make lessons interactive and fun.</p>
-      <ul>
-        <li>PGCE Qualified</li>
-        <li>Medicine Graduate</li>
-        <li>10+ Years Experience</li>
-      </ul>
-    </div>
+  <div class="tutor-details">
+    <h3>Meet Dr. Anindya Srivastava</h3>
+    <p>I'm a passionate and experienced Science tutor with more than 10 years of teaching experience. With a teaching degree (PGCE) from Birmingham City University and a Bachelor's degree in Medicine, I bring both academic excellence and practical knowledge to every lesson.</p>
+    <p>My expertise lies in teaching all three GCSE Sciences (Physics, Chemistry, and Biology) and A-Level Biology. I believe that learning should be engaging and use various teaching methods and strategies to make lessons interactive and fun.</p>
+    <ul>
+      <li>PGCE Qualified</li>
+      <li>Medicine Graduate</li>
+      <li>10+ Years Experience</li>
+    </ul>
   </div>
 </section>
 
-<section class="section testimonials" id="testimonials">
-    <h2>What Our Students Say</h2>
-    <div class="testimonial-grid">
-        <div class="testimonial-card">
-            <p>"Aspire Tuitions helped me boost my grades significantly!"</p>
-            <div class="stars">★★★★★</div>
-            <cite>– John, A-Level Student</cite>
-        </div>
-        <div class="testimonial-card">
-            <p>"The tutors are patient and make learning enjoyable."</p>
-            <div class="stars">★★★★★</div>
-            <cite>– Sarah, GCSE Student</cite>
-        </div>
-        <div class="testimonial-card">
-            <p>"I gained confidence in math thanks to Aspire!"</p>
-            <div class="stars">★★★★★</div>
-            <cite>– Emma, Year 10</cite>
-        </div>
-        <div class="testimonial-card">
-            <p>"Anindya worked with our daughter to catch up on work she had missed due to ill health. She liked his way of teaching and explanations of things she wasn’t understanding. She enjoyed learning all three science subjects with him. We strongly recommend him."</p>
-            <div class="stars">★★★★★</div>
-            <cite>– Helen (Mrs)</cite>
-        </div>
-        <div class="testimonial-card">
-            <p>"We have been using Anindya for a few months now. He teaches A Level Biology for my daughter and all three sciences for my son at GCSE. Anindya is very thoughtful, flexible and well structured. My children work well with him. He has a great deal of knowledge and resources that he uses to drive the students, and always leaves extra work if required. I would be happy to recommend him — he is very pleasant, punctual and professional."</p>
-            <div class="stars">★★★★★</div>
-            <cite>– Chris (Mr)</cite>
-        </div>
-        <div class="testimonial-card">
-            <p>"My son says Dr Anindya is the best teacher he has had. He says he explains Science in a way that makes even things he’s not understood before really clear."</p>
-            <div class="stars">★★★★★</div>
-            <cite>– Catherine (Ms)</cite>
-        </div>
-    </div>
+<section class="section" id="lessons">
+  <h2>Available Lessons</h2>
+  <div class="services-grid">
+    <div class="service-card"><h3>GCSE Physics</h3><p>Thursdays 5:30–6:30 pm</p></div>
+    <div class="service-card"><h3>GCSE Chemistry</h3><p>Thursdays 6:30–7:30 pm</p></div>
+    <div class="service-card"><h3>GCSE Biology</h3><p>Fridays 5:30–6:30 pm</p></div>
+    <div class="service-card"><h3>A Level Biology</h3><p>Fridays 6:30–7:30 pm</p></div>
+  </div>
+  <p style="text-align:center; margin-top: 2rem; font-size: 1.1rem;">
+    <strong>All lessons are held at:</strong><br />
+    The Old Fire Station, 37 High Street, Eccleshall, ST21 6BW
+  </p>
+</section>
+
+<section class="section" id="testimonials">
+  <h2>What Our Students Say</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card"><p>"Aspire Tuitions helped me boost my grades significantly!"</p><div class="stars">★★★★★</div><cite>– John</cite></div>
+    <div class="testimonial-card"><p>"The tutors are patient and make learning enjoyable."</p><div class="stars">★★★★★</div><cite>– Sarah</cite></div>
+    <div class="testimonial-card"><p>"I gained confidence in math thanks to Aspire!"</p><div class="stars">★★★★★</div><cite>– Emma</cite></div>
+    <div class="testimonial-card"><p>"Anindya worked with our daughter... all three science subjects with him. We strongly recommend him."</p><div class="stars">★★★★★</div><cite>– Helen</cite></div>
+    <div class="testimonial-card"><p>"Anindya teaches A Level Biology for my daughter and GCSE sciences for my son... very pleasant, punctual and professional."</p><div class="stars">★★★★★</div><cite>– Chris</cite></div>
+    <div class="testimonial-card"><p>"Dr Anindya is the best teacher my son has had... he explains Science clearly."</p><div class="stars">★★★★★</div><cite>– Catherine</cite></div>
+  </div>
 </section>
 
 <section class="section" id="contact">
@@ -266,5 +234,6 @@
   <p>&copy; 2025 Aspire Tuitions. All rights reserved.</p>
   <p><a href="#contact">Contact</a> | <a href="#">Privacy Policy</a></p>
 </footer>
+
 </body>
 </html>
